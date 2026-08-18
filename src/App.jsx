@@ -1,3 +1,4 @@
+import { CalculatorProvider } from './components/revenue/CalculatorContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import WhySkillects from './components/WhySkillects'
@@ -44,13 +45,15 @@ const sections = [
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      {sections.map(([name, Section]) => (
-        <div key={name} data-section={name}>
-          <Section />
-        </div>
-      ))}
-    </div>
+    <CalculatorProvider>
+      <div className="min-h-screen bg-white">
+        {sections.map(([name, Section]) => (
+          <div key={name} data-section={name}>
+            <Section />
+          </div>
+        ))}
+      </div>
+    </CalculatorProvider>
   )
 }
 
