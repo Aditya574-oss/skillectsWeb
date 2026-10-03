@@ -45,7 +45,7 @@ const sections = [
 function App() {
   return (
     <CalculatorProvider>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white overflow-x-clip">
         {sections.map(([name, Section]) => (
           <div key={name} data-section={name}>
             <Section />
