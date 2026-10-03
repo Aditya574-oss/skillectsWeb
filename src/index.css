@@ -6,6 +6,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep anchor-linked sections clear of the fixed header, for both <a href="#..."> jumps
+   and scrollIntoView() calls. */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 body {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }

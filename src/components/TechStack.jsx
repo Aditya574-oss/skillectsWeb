@@ -1,3 +1,12 @@
+function PeopleIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  )
+}
+
 const tools = ['Bullhorn', 'Loxo', 'JobDiva', 'LinkedIn Talent Solutions', 'Indeed', 'Google Workspace', 'Microsoft 365']
 
 const features = [
@@ -10,7 +19,7 @@ const features = [
 
 export default function TechStack() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
+    <section id="tech-stack" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-4xl font-extrabold tracking-tight">
           We Work Inside <span className="text-brand-blue">Your Ecosystem</span>
@@ -41,8 +50,8 @@ export default function TechStack() {
 
       <div className="mt-10 rounded-2xl bg-blue-50 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <span className="w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center text-xl">
-            ✔️
+          <span className="w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center">
+            <PeopleIcon className="w-6 h-6" />
           </span>
           <div>
             <p className="font-bold">Your Tools. Our People. One Powerful System.</p>

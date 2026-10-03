@@ -1,8 +1,13 @@
+import moneyImage from '../assets/images/problem-money.jpg'
+import timeImage from '../assets/images/problem-time.jpg'
+import riskImage from '../assets/images/problem-risk.jpg'
+import statusImage from '../assets/images/problem-status.jpg'
+
 const items = [
   {
     n: '01',
-    emoji: '💰',
     title: 'MONEY',
+    image: moneyImage,
     desc: 'Rising recruiter salaries and overhead are eating into your margins.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
@@ -12,8 +17,8 @@ const items = [
   },
   {
     n: '02',
-    emoji: '⏳',
     title: 'TIME',
+    image: timeImage,
     desc: 'Slow time-to-fill means delayed placements and lost revenue.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
@@ -23,8 +28,8 @@ const items = [
   },
   {
     n: '03',
-    emoji: '⚠️',
     title: 'RISK',
+    image: riskImage,
     desc: 'Recruiter turnover and inconsistency kill momentum.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
@@ -34,9 +39,9 @@ const items = [
   },
   {
     n: '04',
-    emoji: '🎯',
     title: 'STATUS',
-    desc: 'Missed delivery targets hurt your reputation.',
+    image: statusImage,
+    desc: 'Missed delivery targets hurt your reputation and client trust.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
         <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" />
@@ -56,8 +61,8 @@ const DotGrid = () => (
 
 export default function ProblemSection() {
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <section id="bottlenecks" className="bg-gray-50 py-16">
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6 text-center">
         <h2 className="text-4xl font-bold tracking-tight">
           You Don't Have A <span className="text-brand-blue font-extrabold">Recruiting Problem.</span>
         </h2>
@@ -67,28 +72,29 @@ export default function ProblemSection() {
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item) => (
-            <div key={item.n} className="relative bg-white rounded-2xl shadow-md border border-gray-100 px-6 pb-6 pt-12 text-center">
+            <div key={item.n} className="relative bg-white rounded-2xl shadow-md border border-gray-100 text-center">
               {/* Number badge — centered on top border */}
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-brand-blue text-white text-sm font-bold flex items-center justify-center shadow-sm">
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 w-9 h-9 rounded-full bg-brand-blue text-white text-sm font-bold flex items-center justify-center shadow-sm">
                 {item.n}
               </span>
 
-              {/* Illustration emoji */}
-              <div className="text-6xl mb-5 leading-none">{item.emoji}</div>
+              <img src={item.image} alt="" className="h-36 w-full rounded-t-2xl object-cover" />
 
-              {/* Small icon circle */}
-              <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-3">
-                {item.icon}
+              <div className="px-6 pb-6 pt-5">
+                {/* Small icon circle */}
+                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-3">
+                  {item.icon}
+                </div>
+
+                {/* Title */}
+                <p className="font-extrabold text-brand-blue tracking-widest text-base">{item.title}</p>
+
+                {/* Centered underline */}
+                <div className="w-8 h-0.5 bg-brand-blue rounded mx-auto mt-2 mb-3" />
+
+                {/* Description */}
+                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
-
-              {/* Title */}
-              <p className="font-extrabold text-brand-blue tracking-widest text-base">{item.title}</p>
-
-              {/* Centered underline */}
-              <div className="w-8 h-0.5 bg-brand-blue rounded mx-auto mt-2 mb-3" />
-
-              {/* Description */}
-              <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

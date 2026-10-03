@@ -87,7 +87,7 @@ const verdictColor = {
 }
 
 export default function ScaleAssessment() {
-  const { inputs, metrics } = useCalculator()
+  const { inputs, metrics, isDefault, setShowDemoNotice } = useCalculator()
   const recruiters = inputs.recruiters
   const placements = inputs.placementsPerMonth
   /* No source for these in Section 4's calculator, so they stay independent illustrative figures. */
@@ -115,8 +115,13 @@ export default function ScaleAssessment() {
   const needleY = 100 - 90 * Math.sin(theta)
   const needleAngle = -90 + (score / 100) * 180
 
+  const goToCalculator = () => {
+    document.getElementById('roi-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (isDefault) setShowDemoNotice(true)
+  }
+
   return (
-    <section id="assessment" className="max-w-7xl mx-auto px-6 py-16">
+    <section id="assessment" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h2 className="text-4xl font-extrabold tracking-tight leading-tight">
           Take Our 5-Minute Assessment.
@@ -162,7 +167,10 @@ export default function ScaleAssessment() {
           <p className="text-sm text-gray-500 mt-4 max-w-xs">
             Get your personalized report with actionable recommendations.
           </p>
-          <button className="mt-4 w-full bg-brand-blue text-white font-semibold rounded-xl py-3 hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2">
+          <button
+            onClick={goToCalculator}
+            className="mt-4 w-full bg-brand-blue text-white font-semibold rounded-xl py-3 hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2"
+          >
             Send My Free Report <ArrowRightIcon className="w-4 h-4" />
           </button>
         </div>

@@ -13,7 +13,6 @@ import WhyChooseUs from './components/WhyChooseUs'
 import PricingSection from './components/PricingSection'
 import ZeroRisk from './components/ZeroRisk'
 import CaseStudiesGrid from './components/CaseStudiesGrid'
-import VideoTestimonials from './components/VideoTestimonials'
 import MeetThePod from './components/MeetThePod'
 import TechStack from './components/TechStack'
 import Leadership from './components/Leadership'
@@ -35,7 +34,7 @@ const sections = [
   ['PricingSection', PricingSection],
   ['ZeroRisk', ZeroRisk],
   ['CaseStudiesGrid', CaseStudiesGrid],
-  ['VideoTestimonials', VideoTestimonials],
+  // ['VideoTestimonials', VideoTestimonials], // hidden until we have real testimonial data
   ['MeetThePod', MeetThePod],
   ['TechStack', TechStack],
   ['Leadership', Leadership],

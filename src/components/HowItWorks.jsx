@@ -186,12 +186,31 @@ const integration = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="max-w-7xl mx-auto px-6 py-16">
-      <div className="flex items-center gap-2">
-        <span className="text-gray-300 text-2xl font-light">/</span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-          SKILLECTS Partnership: <span className="text-brand-blue">6-Step Continuous Advantage Framework</span>
-        </h2>
+    <section id="how-it-works" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
+      <div className="flex items-start justify-between gap-6">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-300 text-2xl font-light">/</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            SKILLECTS Partnership: <span className="text-brand-blue">6-Step Continuous Advantage Framework</span>
+          </h2>
+        </div>
+        <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-brand-blue">
+            <circle cx="12" cy="7" r="4" fill="currentColor" />
+            <path d="M4 21v-2a8 8 0 0116 0v2" fill="currentColor" />
+          </svg>
+          <div>
+            <span
+              className="text-lg tracking-widest uppercase leading-none block"
+              style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 500 }}
+            >
+              SKILLECTS
+            </span>
+            <span className="text-[10px] text-gray-500 tracking-wide block">
+              Simplify Workforce. Amplify Business.
+            </span>
+          </div>
+        </div>
       </div>
       <p className="mt-3 text-gray-600 max-w-3xl">
         We integrate as an extension of your team and processes, driving measurable growth and long-term impact.

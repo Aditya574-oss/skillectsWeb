@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { fmt, fmtPct } from './revenue/calc'
 import { useCalculator } from './revenue/CalculatorContext'
 import { downloadReportPdf } from './revenue/generateReport'
+import { validateLead } from './revenue/validateLead'
 import DeliveryHealthGauge from './revenue/DeliveryHealthGauge'
 import RevenueGrowthChart from './revenue/RevenueGrowthChart'
 import {
@@ -10,6 +11,212 @@ import {
   CheckIcon, LockIcon, PersonIcon, PeopleIcon, MonitorIcon, BuildingIcon,
   GraduationCapIcon, ClockIcon, ArrowRightIcon, RecalculateIcon,
 } from './revenue/Icons'
+
+function CloseIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  )
+}
+
+function DemoDataNotice({ onClose, onEnterOwnNumbers }) {
+  useEffect(() => {
+    const handleEscape = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [onClose])
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-7">
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          <CloseIcon className="w-5 h-5" />
+        </button>
+        <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+          <InfoIcon className="w-6 h-6 text-brand-blue" />
+        </div>
+        <p className="text-lg font-bold text-gray-900 leading-snug">
+          These Numbers Are Just a Preview
+        </p>
+        <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+          The figures above are sample numbers so you can see how the calculator works — not your
+          real results yet. Pop in your own recruiting numbers to generate a report that's actually
+          yours, or skip ahead and talk to our team directly.
+        </p>
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <a
+            href="#book-a-call"
+            onClick={onClose}
+            className="flex-1 text-center bg-brand-blue text-white text-sm font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2"
+          >
+            Book a Free Call <ArrowRightIcon className="w-4 h-4" />
+          </a>
+          <button
+            onClick={onEnterOwnNumbers}
+            className="flex-1 text-center border border-gray-200 text-gray-700 text-sm font-semibold px-5 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            I'll Enter My Numbers
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ReportField({ label, name, type = 'text', required, value, error, onChange, autoComplete }) {
+  return (
+    <div>
+      <label htmlFor={`report-${name}`} className="block text-xs font-semibold text-gray-700 mb-1.5">
+        {label} {required ? <span className="text-red-500">*</span> : <span className="text-gray-400 font-normal">(optional)</span>}
+      </label>
+      <input
+        id={`report-${name}`}
+        name={name}
+        type={type}
+        autoComplete={autoComplete}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        aria-invalid={Boolean(error)}
+        className={`w-full border rounded-lg px-3 py-2.5 text-sm text-gray-900 outline-none focus:ring-1 ${
+          error
+            ? 'border-red-400 focus:border-red-400 focus:ring-red-400'
+            : 'border-gray-300 focus:border-brand-blue focus:ring-brand-blue'
+        }`}
+      />
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+    </div>
+  )
+}
+
+function ReportModal({ stage, onSubmit, onClose, onRetry, savedLead }) {
+  const [values, setValues] = useState({
+    fullName: savedLead?.fullName ?? '',
+    companyName: savedLead?.companyName ?? '',
+    email: savedLead?.email ?? '',
+    phone: savedLead?.phone ?? '',
+  })
+  const [errors, setErrors] = useState({})
+  const locked = stage === 'loading'
+
+  useEffect(() => {
+    if (locked) return
+    const handleEscape = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [locked, onClose])
+
+  const setField = (key) => (val) => {
+    setValues((v) => ({ ...v, [key]: val }))
+    setErrors((e) => ({ ...e, [key]: undefined }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const found = validateLead(values)
+    setErrors(found)
+    if (Object.keys(found).length > 0) return
+    onSubmit({
+      fullName: values.fullName.trim(),
+      companyName: values.companyName.trim(),
+      email: values.email.trim(),
+      phone: values.phone.trim(),
+    })
+  }
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+      <div
+        className="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm"
+        onClick={locked ? undefined : onClose}
+      />
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7">
+        {!locked && (
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <CloseIcon className="w-5 h-5" />
+          </button>
+        )}
+
+        {stage === 'form' && (
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+              <DocumentIcon className="w-6 h-6 text-brand-blue" />
+            </div>
+            <p className="text-lg font-bold text-gray-900 leading-snug">Get Your Personalized Report</p>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              Enter your details to download a report built on your numbers. Fields marked
+              <span className="text-red-500"> * </span>are required.
+            </p>
+
+            <div className="mt-5 space-y-4">
+              <ReportField label="Full Name" name="fullName" required autoComplete="name"
+                value={values.fullName} error={errors.fullName} onChange={setField('fullName')} />
+              <ReportField label="Company Name" name="companyName" autoComplete="organization"
+                value={values.companyName} error={errors.companyName} onChange={setField('companyName')} />
+              <ReportField label="Work Email" name="email" type="email" required autoComplete="email"
+                value={values.email} error={errors.email} onChange={setField('email')} />
+              <ReportField label="Phone Number" name="phone" type="tel" required autoComplete="tel"
+                value={values.phone} error={errors.phone} onChange={setField('phone')} />
+            </div>
+
+            <button
+              type="submit"
+              className="mt-6 w-full bg-brand-blue text-white text-sm font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2"
+            >
+              Download My Report <ArrowRightIcon className="w-4 h-4" />
+            </button>
+            <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-gray-400">
+              <LockIcon className="w-3.5 h-3.5" /> Your details are kept confidential.
+            </p>
+          </form>
+        )}
+
+        {stage === 'loading' && (
+          <div className="py-8 flex flex-col items-center text-center" role="status" aria-live="polite">
+            <div className="w-12 h-12 rounded-full border-4 border-blue-100 border-t-brand-blue animate-spin" />
+            <p className="mt-5 text-lg font-bold text-gray-900">Preparing Your Report…</p>
+            <p className="mt-2 text-sm text-gray-600">
+              We're generating your personalized PDF. This will only take a moment.
+            </p>
+          </div>
+        )}
+
+        {stage === 'error' && (
+          <div className="py-4 flex flex-col items-center text-center">
+            <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
+              <InfoIcon className="w-6 h-6 text-red-500" />
+            </div>
+            <p className="text-lg font-bold text-gray-900">We Couldn't Prepare Your Report</p>
+            <p className="mt-2 text-sm text-gray-600">Something went wrong while generating your PDF. Please try again.</p>
+            <div className="mt-6 flex gap-3 w-full">
+              <button
+                onClick={onRetry}
+                className="flex-1 bg-brand-blue text-white text-sm font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Try Again
+              </button>
+              <button
+                onClick={onClose}
+                className="flex-1 border border-gray-200 text-gray-700 text-sm font-semibold px-5 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
 
 const features = [
   { title: 'Data-Driven Projections', desc: 'Real outcomes based on your actual business metrics.', icon: BarChartIcon },
@@ -99,9 +306,12 @@ function CostBlock({ icon: Icon, label, value }) {
 }
 
 export default function RevenueCalculator() {
-  const { inputs, setInputs, metrics: m } = useCalculator()
+  const {
+    inputs, setInputs, metrics: m, isDefault, showDemoNotice, setShowDemoNotice, leadDetails, setLeadDetails,
+  } = useCalculator()
   const [draft, setDraft] = useState(inputs)
   const [generatingReport, setGeneratingReport] = useState(false)
+  const [reportStage, setReportStage] = useState(null)
   const titleRef = useRef(null)
   const leftColRef = useRef(null)
   const calcCardRef = useRef(null)
@@ -113,10 +323,26 @@ export default function RevenueCalculator() {
   const setDraftField = (key) => (value) => setDraft((d) => ({ ...d, [key]: value }))
   const recalculate = () => setInputs(draft)
 
-  const handleGenerateReport = async () => {
+  const handleEnterOwnNumbers = () => {
+    setShowDemoNotice(false)
+    document.getElementById('roi-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleGenerateReport = () => {
     if (generatingReport) return
+    if (isDefault) {
+      setShowDemoNotice(true)
+      return
+    }
+    setReportStage('form')
+  }
+
+  const runReportDownload = async (lead) => {
+    setLeadDetails(lead)
+    setReportStage('loading')
     setGeneratingReport(true)
     try {
+      await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)))
       const blocks = [
         titleRef.current,
         leftColRef.current,
@@ -127,13 +353,16 @@ export default function RevenueCalculator() {
         footerRef.current,
       ]
       await downloadReportPdf(blocks, 'skillects-revenue-report.pdf')
+      setReportStage(null)
+    } catch {
+      setReportStage('error')
     } finally {
       setGeneratingReport(false)
     }
   }
 
   return (
-    <section id="roi-calculator" className="max-w-7xl mx-auto px-6 py-16">
+    <section id="roi-calculator" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
 
       {/* Heading */}
       <div ref={titleRef} className="pb-1.5">
@@ -141,6 +370,17 @@ export default function RevenueCalculator() {
         <p className="text-3xl font-bold tracking-tight text-gray-900 mt-1">
           See Your Growth Potential. <span className="text-brand-blue">In Real Numbers.</span>
         </p>
+
+        {/* Shown only in the downloaded PDF, with the details captured from the report form. */}
+        {leadDetails && (
+          <div data-pdf-show="block" className="hidden mt-5 rounded-xl border border-gray-200 p-4 text-sm text-gray-700">
+            <p className="font-bold text-gray-900 mb-2">Prepared for</p>
+            <p>Full Name: {leadDetails.fullName}</p>
+            {leadDetails.companyName && <p>Company: {leadDetails.companyName}</p>}
+            <p>Email: {leadDetails.email}</p>
+            <p>Phone: {leadDetails.phone}</p>
+          </div>
+        )}
       </div>
 
       <div className="grid lg:grid-cols-[0.85fr_1.7fr] gap-8 items-start mt-8">
@@ -399,6 +639,20 @@ export default function RevenueCalculator() {
       <p ref={footerRef} className="mt-6 py-2 text-center text-xs text-gray-400 flex items-center justify-center gap-1.5">
         <LockIcon className="w-3.5 h-3.5" /> Your data is 100% secure and confidential. We never share your information.
       </p>
+
+      {showDemoNotice && (
+        <DemoDataNotice onClose={() => setShowDemoNotice(false)} onEnterOwnNumbers={handleEnterOwnNumbers} />
+      )}
+
+      {reportStage && (
+        <ReportModal
+          stage={reportStage}
+          onSubmit={runReportDownload}
+          onClose={() => setReportStage(null)}
+          onRetry={() => runReportDownload(leadDetails)}
+          savedLead={leadDetails}
+        />
+      )}
 
     </section>
   )

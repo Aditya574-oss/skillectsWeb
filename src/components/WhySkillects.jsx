@@ -1,39 +1,8 @@
+import lowerBarImage from '../assets/images/solutions-lower-bar.jpg'
+
 const traditional = ['High Cost', 'Low Capacity', 'Burnout', 'Siloed Process', 'Unpredictable Results']
 
-const skillectsWay = [
-  {
-    label: 'Predictable Capacity',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    label: '10x More Output',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Cost Efficient',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
-        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Growth Focused',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-brand-blue" stroke="currentColor" strokeWidth="2">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-  },
-]
+const skillectsWay = ['Predictable Capacity', '10x More Output', 'Cost Efficient', 'Growth Focused']
 
 const bottomFeatures = [
   {
@@ -91,7 +60,7 @@ const bottomFeatures = [
 
 export default function WhySkillects() {
   return (
-    <section id="solutions" className="max-w-7xl mx-auto px-6 py-16">
+    <section id="solutions" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
       <div className="grid lg:grid-cols-2 gap-12 items-start">
 
         {/* Left: copy */}
@@ -130,20 +99,19 @@ export default function WhySkillects() {
             <div className="bg-gray-600 text-white text-center font-semibold py-3 text-sm">
               Traditional Approach
             </div>
-            <div className="p-4 flex flex-col gap-2 flex-1">
+            {/* Placeholder for the design's photo of a stressed recruiter; no image asset exists yet. */}
+            <div className="h-32 bg-gradient-to-br from-slate-300 to-slate-500" />
+            <div className="p-4 flex flex-col gap-3 flex-1">
               {traditional.map((t) => (
-                <div key={t} className="bg-white rounded-xl px-3 py-2 text-xs font-medium text-gray-700 text-center shadow-sm border border-gray-100">
-                  {t}
+                <div key={t} className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-gray-500" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium text-gray-800">{t}</span>
                 </div>
               ))}
-            </div>
-            <div className="px-4 pb-4 flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-gray-500" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </div>
-              <p className="text-xs font-semibold text-gray-600">Expensive. Slow. Unreliable.</p>
             </div>
           </div>
 
@@ -159,44 +127,45 @@ export default function WhySkillects() {
             <div className="bg-brand-blue text-white text-center font-semibold py-3 text-sm">
               The SKILLECTS Way
             </div>
+            {/* Placeholder for the design's photo of a SKILLECTS pod at work; no image asset exists yet. */}
+            <div className="h-32 bg-gradient-to-br from-slate-300 to-slate-500" />
             <div className="p-4 flex flex-col gap-3 flex-1 bg-blue-50/40">
               {skillectsWay.map((s) => (
-                <div key={s.label} className="flex items-center gap-2.5">
+                <div key={s} className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                    {s.icon}
+                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-brand-blue" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
                   </div>
-                  <span className="text-sm font-medium text-gray-800">{s.label}</span>
+                  <span className="text-sm font-medium text-gray-800">{s}</span>
                 </div>
               ))}
-            </div>
-            <div className="px-4 pb-4 bg-blue-50/40 flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-white" stroke="currentColor" strokeWidth="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <p className="text-xs font-semibold text-gray-800">Predictable. Scalable. Built for Growth.</p>
             </div>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom features row */}
-      <div className="mt-14 rounded-2xl border border-gray-200 shadow-md py-6 px-2
-        grid sm:grid-cols-2 lg:grid-cols-5">
-        {bottomFeatures.map((f) => (
-          <div key={f.title} className="flex flex-col gap-2 px-6 py-4 sm:py-3 lg:py-0
-            border-b border-gray-200 last:border-b-0
-            sm:odd:border-r sm:last:border-r-0
-            lg:border-b-0 lg:border-r lg:last:border-r-0">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-              {f.icon}
+      {/* Bottom features row, on a full-width photo backdrop per the design */}
+      <div className="relative mt-20">
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen -top-16 h-56 overflow-hidden">
+          <img src={lowerBarImage} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="relative rounded-2xl border border-gray-200 shadow-md py-6 px-2 bg-white
+          grid sm:grid-cols-2 lg:grid-cols-5">
+          {bottomFeatures.map((f) => (
+            <div key={f.title} className="flex flex-col gap-2 px-6 py-4 sm:py-3 lg:py-0
+              border-b border-gray-200 last:border-b-0
+              sm:odd:border-r sm:last:border-r-0
+              lg:border-b-0 lg:border-r lg:last:border-r-0">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                {f.icon}
+              </div>
+              <p className="font-bold text-gray-900 text-sm leading-tight">{f.title}</p>
+              <p className="text-xs text-gray-500 leading-snug">{f.desc}</p>
             </div>
-            <p className="font-bold text-gray-900 text-sm leading-tight">{f.title}</p>
-            <p className="text-xs text-gray-500 leading-snug">{f.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

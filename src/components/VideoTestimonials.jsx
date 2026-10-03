@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 const videos = [
-  { role: 'CEO, IT Staffing Firm', quote: '"SKILLECTS helped us scale our team without increasing overhead."', emoji: '🧑‍💼' },
-  { role: 'VP Delivery, Staffing Firm', quote: '"The recruiters are outstanding. Our placements jumped 40%."', emoji: '👩‍💼' },
-  { role: 'Delivery Manager', quote: '"Onboarding was easy. Results were immediate and measurable."', emoji: '👩‍💻' },
-  { role: 'Founder, Recruiting Agency', quote: '"SKILLECTS is now a core part of how we deliver for clients."', emoji: '🧑‍💻' },
+  { role: 'CEO, IT Staffing Firm', quote: '"SKILLECTS helped us scale our team without increasing overhead."' },
+  { role: 'VP Delivery, Staffing Firm', quote: '"The recruiters are outstanding. Our placements jumped 40%."' },
+  { role: 'Delivery Manager', quote: '"Onboarding was easy. Results were immediate and measurable."' },
+  { role: 'Founder, Recruiting Agency', quote: '"SKILLECTS is now a core part of how we deliver for clients."' },
 ]
 
 export default function VideoTestimonials() {
@@ -12,8 +12,8 @@ export default function VideoTestimonials() {
   const visible = [videos[active], videos[(active + 1) % videos.length], videos[(active + 2) % videos.length]]
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="video-testimonials" className="bg-gray-50 py-16">
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-4xl font-extrabold tracking-tight">
             Real Clients. <span className="text-brand-blue">Real Results.</span>
@@ -27,8 +27,7 @@ export default function VideoTestimonials() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visible.map((v) => (
             <div key={v.role} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="bg-gray-800 h-48 flex items-center justify-center relative">
-                <span className="text-6xl opacity-70">{v.emoji}</span>
+              <div className="h-48 flex items-center justify-center relative bg-gradient-to-br from-slate-300 to-slate-500">
                 <button className="absolute w-14 h-14 rounded-full bg-brand-blue text-white flex items-center justify-center text-2xl hover:bg-blue-700 transition-colors">
                   ▶
                 </button>

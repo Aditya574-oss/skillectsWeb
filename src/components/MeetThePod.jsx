@@ -1,3 +1,12 @@
+import sourcerImage from '../assets/images/pod-sourcer.jpg'
+import recruiterImage from '../assets/images/pod-recruiter.jpg'
+import smeRecruiterImage from '../assets/images/pod-sme-recruiter.jpg'
+import bdTeamImage from '../assets/images/pod-bd-team.jpg'
+import hrbpImage from '../assets/images/pod-hrbp.jpg'
+import onboardingImage from '../assets/images/pod-onboarding.jpg'
+import crmAdminImage from '../assets/images/pod-crm-admin.jpg'
+import virtualAssistantImage from '../assets/images/pod-virtual-assistant.jpg'
+
 function SearchIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,28 +93,28 @@ function ArrowRightIcon({ className }) {
 }
 
 const coreTeam = [
-  { role: 'Sourcer', badge: 'Talent Finder', icon: SearchIcon, desc: 'Finds top talent and builds strong pipelines.' },
-  { role: 'Recruiter', badge: 'Placement Specialist', icon: PeopleIcon, desc: 'Manages end-to-end recruitment and ensures right placements.' },
-  { role: 'SME Recruiter', badge: 'Strategic Recruiter', icon: StarPersonIcon, desc: 'Handles niche & leadership hiring and works closely with clients.' },
+  { role: 'Sourcer', badge: 'Talent Finder', icon: SearchIcon, image: sourcerImage, desc: 'Finds top talent and builds strong pipelines.' },
+  { role: 'Recruiter', badge: 'Placement Specialist', icon: PeopleIcon, image: recruiterImage, desc: 'Manages end-to-end recruitment and ensures right placements.' },
+  { role: 'SME Recruiter', badge: 'Strategic Recruiter', icon: StarPersonIcon, image: smeRecruiterImage, desc: 'Handles niche & leadership hiring and works closely with clients.' },
   { role: 'Lead Generator', badge: 'Lead Builder', icon: PersonPlusIcon, desc: 'Identifies prospects and generates qualified leads.' },
   { role: 'Market Researcher', badge: 'Insight Finder', icon: BarChartIcon, desc: 'Researches market trends and identifies key opportunities.' },
-  { role: 'Business Development Team (Independent)', badge: 'Growth Accelerator', icon: TrendingUpIcon, desc: 'Acquires new clients and drives sustainable business growth.' },
+  { role: 'Business Development Team (Independent)', badge: 'Growth Accelerator', icon: TrendingUpIcon, image: bdTeamImage, desc: 'Acquires new clients and drives sustainable business growth.' },
 ]
 
 const supportTeam = [
-  { role: 'HRBP (Independent)', badge: 'People Partner', icon: PeopleIcon, desc: 'Drives HR strategies and enhances employee engagement.' },
-  { role: 'On-Boarding (Independent)', badge: 'Seamless Onboarding', icon: ClipboardCheckIcon, desc: 'Ensures seamless onboarding and 100% compliance across clients.' },
+  { role: 'HRBP (Independent)', badge: 'People Partner', icon: PeopleIcon, image: hrbpImage, desc: 'Drives HR strategies and enhances employee engagement.' },
+  { role: 'On-Boarding (Independent)', badge: 'Seamless Onboarding', icon: ClipboardCheckIcon, image: onboardingImage, desc: 'Ensures seamless onboarding and 100% compliance across clients.' },
   { role: 'BD Support', badge: 'Engagement Pro', icon: HeadsetIcon, desc: 'Handles outreach, follow-ups and appointment coordination.' },
-  { role: 'CRM Admin', badge: 'Data Keeper', icon: DatabaseIcon, desc: 'Manages CRM, updates data and maintains accurate records.' },
-  { role: 'Virtual Assistant', badge: 'Operations Coordinator', icon: GearIcon, desc: 'Supports daily operations, reporting, documentation and scheduling.' },
+  { role: 'CRM Admin', badge: 'Data Keeper', icon: DatabaseIcon, image: crmAdminImage, desc: 'Manages CRM, updates data and maintains accurate records.' },
+  { role: 'Virtual Assistant', badge: 'Operations Coordinator', icon: GearIcon, image: virtualAssistantImage, desc: 'Supports daily operations, reporting, documentation and scheduling.' },
 ]
 
 function PodCard({ p }) {
   const Icon = p.icon
   return (
     <div className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-      {/* Placeholder for this role's photo in the design; no image asset exists yet. */}
       <div className="h-28 bg-gradient-to-br from-slate-300 to-slate-500 relative">
+        {p.image && <img src={p.image} alt="" className="absolute inset-0 w-full h-full object-cover" />}
         <span className="absolute left-1/2 -bottom-6 -translate-x-1/2 w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center shadow-md ring-4 ring-white">
           <Icon className="w-5 h-5" />
         </span>
@@ -123,7 +132,7 @@ function PodCard({ p }) {
 
 export default function MeetThePod() {
   return (
-    <section id="meet-the-pod" className="max-w-7xl mx-auto px-6 py-16">
+    <section id="meet-the-pod" className="max-w-7xl mx-auto px-[10px] sm:px-6 py-16">
       <div className="text-center max-w-2xl mx-auto mb-10">
         <h2 className="text-4xl font-extrabold tracking-tight">
           The People Behind <span className="text-brand-blue">Your Success</span>

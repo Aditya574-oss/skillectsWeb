@@ -1,3 +1,5 @@
+import heroTeam from '../assets/images/hero-team.jpg'
+
 function CheckCircleIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -118,7 +120,7 @@ const trustItems = [
 export default function Hero() {
   return (
     <section className="pt-12">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-brand-dark leading-tight">
@@ -175,8 +177,11 @@ export default function Hero() {
           </div>
 
           <div className="relative mt-2">
-            {/* Placeholder for the team photo shown in the design; no image asset exists yet. */}
-            <div className="rounded-2xl h-[420px] bg-gradient-to-br from-slate-200 via-slate-300 to-slate-400" />
+            <img
+              src={heroTeam}
+              alt="SKILLECTS offshore recruitment team collaborating in a modern office"
+              className="rounded-2xl h-[420px] w-full object-cover"
+            />
 
             <div className="absolute top-8 right-2 sm:right-4 w-64 bg-white rounded-2xl shadow-xl p-4">
               <p className="font-bold text-gray-900 text-sm flex items-center gap-2 mb-3">
@@ -204,7 +209,7 @@ export default function Hero() {
       </div>
 
       <div className="mt-14 bg-blue-50/60 py-10">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px bg-gray-300" />
             <p className="font-bold text-gray-900 text-sm sm:text-base shrink-0 text-center">

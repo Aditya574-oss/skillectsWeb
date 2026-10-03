@@ -1,3 +1,5 @@
+import teamImage from '../assets/images/why-choose-team.jpg'
+
 const reasons = [
   {
     title: 'Results That Matter',
@@ -64,9 +66,9 @@ const reasons = [
 export default function WhyChooseUs() {
   return (
     <section id="about-us" className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-12">
-          <div>
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
+        <div className="flex flex-col lg:flex-row gap-8 items-stretch mb-12">
+          <div className="lg:w-1/3 shrink-0">
             <h2 className="text-4xl font-extrabold tracking-tight">
               Why Choose <span className="text-brand-blue">SKILLECTS?</span>
             </h2>
@@ -77,22 +79,26 @@ export default function WhyChooseUs() {
             </p>
           </div>
 
-          <div className="hidden lg:flex">
-            <div className="w-full h-full min-h-[180px] rounded-2xl bg-white flex items-center justify-center text-6xl">
-              🧑‍🤝‍🧑
+          <div className="relative flex-1 lg:min-h-[560px] flex items-center">
+            <div className="hidden lg:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen pointer-events-none">
+              <div className="ml-auto w-[64%] h-full rounded-2xl overflow-hidden">
+                <img src={teamImage} alt="" className="w-full h-full object-cover" />
+              </div>
             </div>
-          </div>
 
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <p className="text-3xl text-brand-blue mb-2">"</p>
-            <p className="text-gray-700">
-              "SKILLECTS has completely transformed how we scale our recruitment business. The
-              results speak for themselves."
-            </p>
-            <div className="mt-4 border-t border-gray-100 pt-4">
-              <p className="font-bold text-brand-blue">Mark Richardson</p>
-              <p className="text-sm text-gray-400">Founder, ProLink Staffing</p>
-              <p className="text-yellow-400 mt-1">★★★★★</p>
+            <div className="relative w-full flex lg:justify-end">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 w-full lg:max-w-sm">
+                <p className="text-3xl text-brand-blue mb-2">"</p>
+                <p className="text-gray-700">
+                  "SKILLECTS has completely transformed how we scale our recruitment business. The
+                  results speak for themselves."
+                </p>
+                <div className="mt-4 border-t border-gray-100 pt-4">
+                  <p className="font-bold text-brand-blue">Mark Richardson</p>
+                  <p className="text-sm text-gray-400">Founder, ProLink Staffing</p>
+                  <p className="text-yellow-400 mt-1">★★★★★</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,7 +116,7 @@ export default function WhyChooseUs() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl bg-brand-blue p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white">
+        <div className="mt-10 rounded-2xl bg-brand-dark p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white">
           <div className="flex items-center gap-4">
             <span className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
               <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-brand-blue" stroke="currentColor" strokeWidth="2">

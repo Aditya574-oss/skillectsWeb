@@ -59,10 +59,6 @@ const caseStudies = [
       { label: 'Time-to-Fill Reduced', value: '41%' },
       { label: 'Annual Revenue Growth', value: '$620K+' },
     ],
-    quote: '"SKILLECTS helped us scale our team without increasing overhead. The results speak for themselves."',
-    person: 'Jason Miller',
-    role: 'COO, HireDynamics',
-    avatar: '🧑‍💼',
   },
   {
     tag: 'CASE STUDY 2',
@@ -79,10 +75,6 @@ const caseStudies = [
       { label: 'Time-to-Fill Reduced', value: '48%' },
       { label: 'Annual Revenue Growth', value: '$410K+' },
     ],
-    quote: '"The 1-week pilot exceeded our expectations. We onboarded a full pod within a month."',
-    person: 'Sarah Thompson',
-    role: 'Director, Peak Talent Solutions',
-    avatar: '👩‍💼',
   },
   {
     tag: 'CASE STUDY 3',
@@ -99,10 +91,6 @@ const caseStudies = [
       { label: 'Submission Increase', value: '85%' },
       { label: 'Annual Revenue Growth', value: '$890K+' },
     ],
-    quote: '"Our submission rates and revenue have never been better. SKILLECTS is a true growth partner."',
-    person: 'Daniel Roberts',
-    role: 'Managing Director, GlobalHire Partners',
-    avatar: '🧑‍💼',
   },
 ]
 
@@ -111,7 +99,7 @@ const logos = ['HAYS', 'Motion Recruitment', 'Priority Talent', 'careerjet', 'Ta
 export default function SuccessStories() {
   return (
     <section id="success-stories" className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
         <div className="grid lg:grid-cols-4 gap-12 items-start">
           <div>
             <h2 className="text-4xl font-extrabold tracking-tight">
@@ -138,10 +126,14 @@ export default function SuccessStories() {
 
           <div className="lg:col-span-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {caseStudies.map((cs) => (
-              <div key={cs.tag} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col">
-                <span className="inline-block self-start text-xs font-bold text-white bg-brand-blue rounded-full px-3 py-1 mb-3">
-                  {cs.tag}
-                </span>
+              <div key={cs.tag} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+                {/* Placeholder for this case study's photo in the design; no image asset exists yet. */}
+                <div className="relative h-32 bg-gradient-to-br from-slate-300 to-slate-500">
+                  <span className="absolute top-3 left-3 text-xs font-bold text-white bg-brand-blue rounded-full px-3 py-1">
+                    {cs.tag}
+                  </span>
+                </div>
+                <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-start gap-2">
                   <span className={`w-8 h-8 rounded-lg ${cs.logoColor} text-white flex items-center justify-center text-sm font-bold shrink-0`}>
                     {cs.logo}
@@ -163,7 +155,7 @@ export default function SuccessStories() {
                 <p className="mt-4 text-sm font-bold text-brand-blue">Challenge:</p>
                 <p className="text-sm text-gray-500">{cs.challenge}</p>
 
-                <div className="mt-4 grid grid-cols-3 gap-2 bg-gray-50 rounded-xl p-3 text-center">
+                <div className="mt-4 grid grid-cols-3 gap-2 bg-gray-50 rounded-xl p-3 text-center flex-grow items-start">
                   {cs.metrics.map((m) => (
                     <div key={m.label}>
                       <p className="text-green-600 font-extrabold text-lg">{m.value}</p>
@@ -171,32 +163,22 @@ export default function SuccessStories() {
                     </div>
                   ))}
                 </div>
-
-                <p className="mt-4 text-sm text-gray-600 italic flex-grow">{cs.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-lg">
-                    {cs.avatar}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-brand-blue">{cs.person}</p>
-                    <p className="text-xs text-gray-400">{cs.role}</p>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl bg-blue-50 p-6 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="mt-10 rounded-2xl bg-brand-dark p-6 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <span className="w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center text-xl shrink-0">
+            <span className="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center text-xl shrink-0">
               🏆
             </span>
-            <p className="font-bold text-lg leading-tight">Your Success Story Could Be Next</p>
+            <p className="font-bold text-lg leading-tight text-white">Your Success Story Could Be Next</p>
           </div>
-          <p className="text-sm text-gray-600 lg:max-w-xs">
+          <p className="text-sm text-blue-100 lg:max-w-xs">
             Join hundreds of recruiting firms achieving more with{' '}
-            <span className="font-semibold text-brand-blue">SKILLECTS</span>.
+            <span className="font-semibold text-white">SKILLECTS</span>.
           </p>
           <div className="flex flex-col items-center gap-2 shrink-0">
             <a
@@ -205,7 +187,7 @@ export default function SuccessStories() {
             >
               → Book Your Free Strategy Call
             </a>
-            <p className="text-xs text-gray-500">Let's discuss your goals and build your success story.</p>
+            <p className="text-xs text-blue-100">Let's discuss your goals and build your success story.</p>
           </div>
         </div>
 

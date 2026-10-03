@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import teamImage from '../assets/images/build-pod-team.jpg'
 
 function SourcerIcon({ className }) {
   return (
@@ -184,8 +185,8 @@ export default function BuildPod() {
   const roi = Math.max(50, 320 - (5 - totalSeats) * 30)
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="build-pod" className="bg-gray-50 py-16">
+      <div className="max-w-7xl mx-auto px-[10px] sm:px-6">
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           <div>
             <div className="max-w-2xl">
@@ -199,9 +200,10 @@ export default function BuildPod() {
               </p>
             </div>
 
-            {/* Placeholder for the team photo shown in the design; no image asset exists yet. */}
-            <div className="relative mt-8 rounded-2xl h-64 bg-gradient-to-br from-brand-dark via-slate-800 to-brand-dark">
-              <div className="absolute inset-0 flex flex-col justify-center gap-0.5 pl-6">
+            <div className="relative mt-8 rounded-2xl h-64 overflow-hidden">
+              <img src={teamImage} alt="SKILLECTS recruiting pod collaborating" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/50 to-transparent" />
+              <div className="relative h-full flex flex-col justify-center gap-0.5 pl-6">
                 <p className="text-white font-extrabold text-2xl tracking-wide leading-tight">FOCUS</p>
                 <p className="text-white font-extrabold text-2xl tracking-wide leading-tight">COLLABORATE</p>
                 <p className="text-white font-extrabold text-2xl tracking-wide leading-tight">DELIVER</p>
